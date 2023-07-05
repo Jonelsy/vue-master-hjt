@@ -1,23 +1,98 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import index from '../index'
+import Login from '../login.vue'
+import TestManagement from '../testManagement/TestManagement.vue';
+import UserGroup from '../userGroup/UserGroup.vue';
+import Help from '../help/Help.vue';
+import Feedback from '../feedback/Feedback.vue';
 
+//预约管理
+import List from '../AppointmentManagement/List.vue';
+import Setup from '../AppointmentManagement/Setup.vue';
+import Package from '../AppointmentManagement/Package.vue';
+import Inspection from '../AppointmentManagement/Inspection.vue';
+import CheckItems from '../AppointmentManagement/CheckItems.vue';
+import App from '../App.vue'
+
+//系统设置
+import Menu from "../user/Menu.vue";
+import RoleList from '../user/RoleList.vue';
+import Jurisdiction from '../user/Jurisdiction.vue';
+import UserList from '../user/UserList.vue';
+
+//患者管理
+import SickItem from '../SickPerson/SickItem.vue';
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'home',
-    component: HomeView
+    name: 'Login',
+    component: Login
   },
-  {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
-  }
+    {
+        path: '/index',
+        name: 'index',
+        component: index,
+        children: [
+            {
+                name: '个人中心',
+                path: 'userGroup',
+                component:UserGroup
+            },
+            {
+                name: '角色管理',
+                path: 'userList',
+                component: UserList
+            },
+            {
+                name: '预约列表',
+                path: 'list',
+                component:List
+            },
+            {
+                name: '预约设置',
+                path: 'setup',
+                component:Setup
+            },
+            {
+                name: '套餐管理',
+                path: 'package',
+                component:Package
+            },
+            {
+                name: '检查组管理',
+                path: 'inspection',
+                component:Inspection
+            },
+            {
+                name: '检查项管理',
+                path: 'checkitems',
+                component:CheckItems
+            },
+            {
+                name: '菜单管理',
+                path: 'menu',
+                component:Menu
+            },
+            {
+                name: '权限管理',
+                path: 'Jurisdiction',
+                component:Jurisdiction
+            },
+            {
+                name: '用户管理',
+                path: 'RoleList',
+                component:RoleList
+            },
+            {
+                name: '会员档案',
+                path: 'SickItem',
+                component:SickItem
+            },
+        ]
+    },
 ]
 
 const router = new VueRouter({

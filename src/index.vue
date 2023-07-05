@@ -1,26 +1,48 @@
 <template>
   <div id="app">
-
+    <div class="app_header">
+      <data-header></data-header>
+    </div>
+    <div class="app_content">
+      <div class="app_nav">
+        <side-nav></side-nav>
+      </div>
+      <div class="app_right">
+        <div class="breadcrumb">
+          <el-breadcrumb separator="/">
+            <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+            <el-breadcrumb-item>{{pathName}}</el-breadcrumb-item>
+          </el-breadcrumb>
+        </div>
         <router-view></router-view>
-
+      </div>
+    </div>
 
   </div>
 </template>
 
 <script>
+import DataHeader from './common/DataHeader.vue'
+import SideNav from './common/SideNav.vue'
 
 
 export default {
   name: 'app',
   data () {
     return {
-
+      pathName: this.$route.name,
     }
   },
   components:{
+    DataHeader,
+    SideNav,
 
   },
   watch: {
+    '$route': function(){
+      this.pathName = this.$route.name;
+
+    },
   }
 }
 </script>
