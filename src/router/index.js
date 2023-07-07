@@ -33,7 +33,7 @@ const routes = [
   },
     {
         path: '/index',
-        name: 'index',
+        name: '首页',
         component: index,
         children: [
             {

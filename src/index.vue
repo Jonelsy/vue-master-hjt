@@ -70,11 +70,13 @@ export default {
   flex: 1;
   display: flex;
   flex-flow: row;
+
 }
 .app_nav{
   position: relative;
   flex: 0 0 280px;
   background: #545c64;
+  min-height: 91vh;
 }
 .app_right{
   flex: 1;

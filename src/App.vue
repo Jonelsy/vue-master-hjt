@@ -3,7 +3,6 @@
 
         <router-view></router-view>
 
-
   </div>
 </template>
 
@@ -26,7 +25,9 @@ export default {
 </script>
 
 <style>
-
+body{
+  margin: 0;
+}
 #app{
   height: 100%;
   margin: 0;

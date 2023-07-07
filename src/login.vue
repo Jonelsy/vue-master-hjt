@@ -1,6 +1,6 @@
 <template>
-<div style="margin-top: auto;margin-bottom: auto">
-  <div>
+<div style="width: 100%;height: 100vh;display: flex;justify-content: center;align-items: center;overflow-y: hidden">
+  <div style="width: 100%">
     <el-row type="flex" justify="center">
       <el-col :xl="6" :lg="7">
         <h2>欢迎来到医疗后台管理系统</h2>
@@ -64,6 +64,7 @@ export default {
   },
   methods: {
    async submitForm(formName) {
+     localStorage.removeItem('token')
     await this.$refs[formName].validate((valid) => {
         if (valid) {
           this.$axios.post('http://43.143.189.51:9999/login?'+ qs.stringify(this.loginForm)).then(res => {
@@ -76,7 +77,7 @@ export default {
             localStorage.removeItem("UserStation");
             localStorage.setItem("UserStation",UserStation);
             if (UserStation==1){
-              this.$router.push("/index");
+              this.$router.push("/index/userGroup");
             }else if (UserStation==2){
               this.$notify({
                 title: '错误',
@@ -91,7 +92,6 @@ export default {
                 type: 'danger'
               });
             }
-            this.$router.push("/index");
           })
         } else {
           console.log('error submit!!');
