@@ -2,10 +2,10 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import index from '../index'
 import Login from '../login.vue'
-import TestManagement from '../testManagement/TestManagement.vue';
 import UserGroup from '../userGroup/UserGroup.vue';
-import Help from '../help/Help.vue';
-import Feedback from '../feedback/Feedback.vue';
+//首页
+import Domd from '../userGroup/Domd'
+
 
 //预约管理
 import List from '../AppointmentManagement/List.vue';
@@ -13,7 +13,7 @@ import Setup from '../AppointmentManagement/Setup.vue';
 import Package from '../AppointmentManagement/Package.vue';
 import Inspection from '../AppointmentManagement/Inspection.vue';
 import CheckItems from '../AppointmentManagement/CheckItems.vue';
-import App from '../App.vue'
+
 
 //系统设置
 import Menu from "../user/Menu.vue";
@@ -91,6 +91,11 @@ const routes = [
                 path: 'SickItem',
                 component:SickItem
             },
+            {
+                name: '工具台',
+                path: 'Domd',
+                component:Domd
+            }
         ]
     },
 ]

@@ -77,7 +77,7 @@ export default {
             localStorage.removeItem("UserStation");
             localStorage.setItem("UserStation",UserStation);
             if (UserStation==1){
-              this.$router.push("/index/userGroup");
+              this.$router.push("/index/Domd");
             }else if (UserStation==2){
               this.$notify({
                 title: '错误',

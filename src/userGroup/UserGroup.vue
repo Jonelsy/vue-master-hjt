@@ -108,7 +108,6 @@ export default {
           })
               .then((res)=>{
                 this.getUser();
-                this.getheaderImage()
               });
         } else {
           console.log('error submit!!');
