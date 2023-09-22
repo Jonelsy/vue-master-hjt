@@ -68,6 +68,8 @@ export default {
     await this.$refs[formName].validate((valid) => {
         if (valid) {
           this.$axios.post('http://43.143.189.51:9999/login?'+ qs.stringify(this.loginForm)).then(res => {
+            //接收res后端返回
+            //处理请求头
             const authorization = res.headers['authorization'];
             const User = authorization.split(",");
             const tokens = User[0];

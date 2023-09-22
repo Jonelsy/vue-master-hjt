@@ -68,7 +68,7 @@
           <el-image
               @click="
                 bigImg(`http://imnu.congmingdemofeitegjj.shop/${scope.row.img}`)"
-              style="width: 50px; height: 50px; margin-bottom:-4px"
+              style="width: 100px; height: 100px; margin-bottom:-4px"
               :src="`http://imnu.congmingdemofeitegjj.shop/${scope.row.img}`"
               :preview-src-list="srcList"
           >

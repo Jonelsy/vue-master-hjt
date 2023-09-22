@@ -3,6 +3,7 @@ import App from './App.vue'
 import router from './router'
 import ElementUI from 'element-ui'
 import axios from 'axios';
+//挂载第三方组件
 Vue.prototype.$axios = axios;
 axios.defaults.baseURL = 'http://43.143.189.51:9999';
 axios.defaults.headers.common['Authorization'] = localStorage.getItem("token");

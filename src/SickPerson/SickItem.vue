@@ -71,6 +71,7 @@
           label="说明">
       </el-table-column>
       <el-table-column label="操作"align="center">
+<!--          获取当前行的数据scope-->
         <template slot-scope="scope">
           <el-row>
             <el-button
@@ -92,7 +93,7 @@
         :visible.sync="dialogVisible"
         width="600px"
         @close="resetForm('ruleForm')">
-      <!--内容-->
+      <!--弹框内容-->
       <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="120px" class="demo-ruleForm" label-position="right" >
         <el-form-item label="姓名" prop="name">
           <el-input v-model="ruleForm.name" style="width: 300px"></el-input>
