@@ -1,9 +1,9 @@
 <template>
-<div style="width: 100%;height: 100vh;display: flex;justify-content: center;align-items: center;overflow-y: hidden">
+<div class="contain">
   <div style="width: 100%">
     <el-row type="flex" justify="center">
       <el-col :xl="6" :lg="7">
-        <h2>欢迎来到医疗后台管理系统</h2>
+        <h2 style="color: white">欢迎来到医疗后台管理系统</h2>
       </el-col>
       <el-col :span="1">
         <el-divider direction="vertical"></el-divider>
@@ -133,5 +133,11 @@ export default {
   float: left;
   margin-left: 8px;
   border-radius: 4px;
+}
+.contain{
+  width: 100%;height: 100vh;display: flex;justify-content: center;align-items: center;overflow-y: hidden;
+  background-image: url('./asses/bcgound.jpg');
+  background-size: cover; /* 将背景图片拉伸或缩放以填满整个容器 */
+  background-repeat: no-repeat; /* 防止背景图片重复 */
 }
 </style>
