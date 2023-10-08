@@ -126,11 +126,13 @@
               <el-input v-model="ruleForm.age" style="width: 300px"></el-input>
             </el-form-item>
             <el-form-item label="上传图片" >
-            <el-upload
-                class="upload-demo"
-                drag
-                action="http://43.143.189.51:9999/tsetmeal/upload"
-                multiple>
+              <el-upload
+                  class="avatar-uploader"
+                  action="http://43.143.189.51:9999/tsetmeal/upload"
+                  :show-file-list="false"
+                  :headers="headers"
+                  :on-success="handleAvatarSuccess"
+              >
               <i class="el-icon-upload"></i>
               <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
             </el-upload>
@@ -222,6 +224,9 @@ export default {
       //图片地址
       img:'',
       srcList:["http://imnu.congmingdemofeitegjj.shop/"],
+      headers:{
+        Authorization:localStorage.getItem("token"),
+      },
       checkgroupIds:[],
       //检查组中的检查项
       tableData2:[],
@@ -244,6 +249,7 @@ export default {
         helpcode:'',
        price:'',
         age:'',
+        remark:'',
       },
       ruleForm2:{
         price:'',
@@ -333,6 +339,7 @@ export default {
       this.ruleForm.helpcode = row.helpcode;
      this.ruleForm.price = row.price;
       this.checkgroupIds = row.checkgroupIds;
+      this.ruleForm.remark = row.remark;
       this.handleClick()
     },
     //校验规则
@@ -423,6 +430,15 @@ export default {
             });
           })
     },
+    //文件上传成功
+    handleAvatarSuccess(res) {
+      this.img = res.data;
+      this.$notify({
+        title: '成功',
+        message: '上传成功',
+        type: 'success'
+      });
+    },
     //增加检查项
     addCheckItems(formName){
       this.$refs[formName].validate((valid) => {
@@ -435,7 +451,7 @@ export default {
                 age:this.ruleForm.age,
                 code: this.ruleForm.code,
                 helpcode:this.ruleForm.helpcode,
-                img:'',
+                img:this.img,
                 name: this.ruleForm.name,
                 remark: '',
                 sex: this.ruleForm.sex,
@@ -474,7 +490,14 @@ export default {
         if (valid) {
           this.dialogVisible = false;
           this.loading=true;
-          console.log(this.ruleForm.sex)
+          let sexs = 0
+          if(this.ruleForm.sex==='男'){
+            sexs=1
+          }else if (this.ruleForm.sex==='女'){
+            sexs=2
+          }else{
+            sexs=0
+          }
           this.$axios
               .post("/tsetmeal/update",{
                 age: this.ruleForm.age,
@@ -483,11 +506,11 @@ export default {
                 code: this.ruleForm.code,
                 helpcode:this.ruleForm.helpcode,
                 id: this.ruleForm.id,
-                img: "",
+                img: this.img,
                 name: this.ruleForm.name,
                 price: this.ruleForm.price,
-                remark: "",
-                sex: this.ruleForm.sex
+                remark: this.ruleForm.remark,
+                sex: sexs
               })
               .then((res)=>{
                 this.loading=false;

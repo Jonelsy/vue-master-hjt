@@ -7,7 +7,7 @@
         @keyup.enter.native="selectCheckItems">
     </el-input>
     <el-button icon="el-icon-search" circle @click="selectCheckItems"></el-button>
-    <el-button type="primary" icon="el-icon-edit" circle @click="opendialog"></el-button>
+<!--    <el-button type="primary" icon="el-icon-edit" circle @click="opendialog"></el-button>-->
     <el-table
         :data="tableData"
         :header-cell-style="{'text-align':'center'}"
