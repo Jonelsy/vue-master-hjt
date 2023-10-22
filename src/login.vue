@@ -36,6 +36,7 @@
 <script>
 import qs from 'qs';
 import './antimote/canvas-nest.min.js'
+import axios from "axios";
 export default {
   name: "Login",
   data() {
@@ -78,6 +79,7 @@ export default {
             localStorage.setItem("token",tokens);
             localStorage.removeItem("UserStation");
             localStorage.setItem("UserStation",UserStation);
+            axios.defaults.headers.common['Authorization'] = localStorage.getItem("token");
             if (UserStation==1){
               this.$router.push("/index/Domd");
             }else if (UserStation==2){
