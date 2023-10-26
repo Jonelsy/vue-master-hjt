@@ -1,5 +1,20 @@
 <template>
   <div>
+    <el-input
+        style="width: 200px;padding: 10px"
+        placeholder="请输入查询名称"
+        v-model="input"
+        @keyup.enter.native="getTable"
+    >
+    </el-input>
+    <el-button icon="el-icon-search" circle @click="getTable"></el-button>
+    <el-select v-model="statue" placeholder="请选择状态" @change="getTable" style="margin-left: 10px">
+      <el-option label="全部" value=""></el-option>
+      <el-option label="已预约" value="已预约"></el-option>
+      <el-option label="体检中" value="体检中"></el-option>
+      <el-option label="已完成" value="已完成"></el-option>
+      <el-option label="已取消" value="已取消"></el-option>
+    </el-select>
     <el-table
         :data="tableData"
         :header-cell-style="{'text-align':'center'}"
@@ -30,6 +45,8 @@
       <el-table-column
           align="center"
           prop="orderdate"
+          width="120"
+          sortable
           label="下单时间">
       </el-table-column>
       <el-table-column
@@ -80,6 +97,19 @@
         </template>
       </el-table-column>
     </el-table>
+    <div class="block">
+      <el-pagination
+          style="margin-top: 10px"
+          layout="prev, pager, next"
+          :total="total"
+          :current-page="page"
+          :page-size="pageSize"
+          hide-on-single-page
+          class="pagination"
+          background
+          @current-change="handleCurrentChange">
+      </el-pagination>
+    </div>
   </div>
 </template>
 <script>
@@ -92,9 +122,15 @@ export default{
       value:'',
       fileList: [],
       fileID:'',
+      input:'',
+      page:1,
+      pageSize: 10,
+      total:0,
+      statue:null
     }
   },
   mounted() {
+
     // DOM 加载完毕后执行代码
     // 可以在这里操作 DOM、发送请求等等
     this.$nextTick(() => {
@@ -114,6 +150,11 @@ export default{
 
   },
   methods:{
+    //分页
+    handleCurrentChange(val){
+      this.page = val;
+      this.getTable();
+    },
     //报告上传
     handleRemove(file, fileList) {
       console.log(file, fileList);
@@ -160,15 +201,16 @@ export default{
     getTable(){
       this.$axios.get('/order/page',{
         params:{
-          name:null,
+          name:this.input,
           startTime:null,
           overTime:null,
-          page:1,
-          pageSize:10,
-          status:null,
+          page:this.page,
+          pageSize:this.pageSize,
+          status:this.statue,
         }
       }).then(res=>{
         this.tableData=res.data.data.records
+        this.total = res.data.data.total
         this.tableData.forEach((item,index)=>{
           item.orderdate = this.$formatDate(new Date(item.orderdate),'yyyy-MM-dd')
           if (item.orderstatus==='体检中'){
