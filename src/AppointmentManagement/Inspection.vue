@@ -428,7 +428,7 @@ export default {
     //修改检查项
     async changeCheckItems(formName){
       this.$refs[formName].validate((valid) => {
-        console.log(this.multipleSelection2)
+
         if (valid) {
           this.dialogVisible = false;
           this.loading=true;

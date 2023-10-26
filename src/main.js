@@ -6,6 +6,7 @@ import axios from 'axios';
 //挂载第三方组件
 Vue.prototype.$axios = axios;
 axios.defaults.baseURL = 'http://43.143.189.51:9999';
+axios.defaults.headers.common['Authorization'] = localStorage.getItem("token");
 Vue.use(ElementUI);
 import formatDate from './DataChange/FormData.js'
 Vue.prototype.$formatDate = formatDate
